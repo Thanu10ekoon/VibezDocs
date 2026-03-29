@@ -1,0 +1,93 @@
+{
+  "name": "vibezdocs",
+  "displayName": "VibezDocs",
+  "description": "Automatically generates and maintains docs/Doc.md from code changes.",
+  "version": "0.1.1",
+  "publisher": "vibez",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:vibezdocs.generateNow"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vibezdocs.generateNow",
+        "title": "VibezDocs: Generate Docs Now"
+      }
+    ],
+    "configuration": {
+      "title": "VibezDocs",
+      "properties": {
+        "vibezdocs.autoUpdate": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable automatic docs updates when code changes are detected."
+        },
+        "vibezdocs.updateFrequencyMs": {
+          "type": "number",
+          "default": 3000,
+          "minimum": 2000,
+          "maximum": 5000,
+          "description": "Debounce/batch interval in milliseconds for automatic updates."
+        },
+        "vibezdocs.provider": {
+          "type": "string",
+          "enum": [
+            "groq",
+            "huggingface"
+          ],
+          "default": "groq",
+          "description": "LLM provider used for timeline and architecture summarization."
+        },
+        "vibezdocs.groqApiKey": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Groq API key used when provider is `groq`."
+        },
+        "vibezdocs.groqModel": {
+          "type": "string",
+          "default": "llama-3.1-8b-instant",
+          "description": "Groq model name."
+        },
+        "vibezdocs.hfApiKey": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "HuggingFace Inference API key used when provider is `huggingface`."
+        },
+        "vibezdocs.hfModel": {
+          "type": "string",
+          "default": "meta-llama/Llama-3.1-8B-Instruct",
+          "description": "HuggingFace model id."
+        },
+        "vibezdocs.maxLlmCallsPerHour": {
+          "type": "number",
+          "default": 60,
+          "minimum": 1,
+          "description": "Safety limit for LLM calls per hour."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "package": "npm run compile",
+    "test": "npm run compile && node --test ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^3.7.1",
+    "eslint": "^9.17.0",
+    "typescript": "^5.7.2"
+  }
+}

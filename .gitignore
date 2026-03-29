@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+out/
+dist/
+build/
+*.tsbuildinfo
+
+# Generated JavaScript from TypeScript source
+src/**/*.js
+src/**/*.js.map
+test/**/*.js
+test/**/*.js.map
+
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Test artifacts
+coverage/
+.nyc_output/
+
+# VS Code extension test workspace
+.vscode-test/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# OS and editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+.vscode/*.code-snippets
